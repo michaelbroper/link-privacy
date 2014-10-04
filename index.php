@@ -301,7 +301,7 @@ function linkprivacy_dashboard_widget_function() {
 $link_address = '#';
 	// echo 'Talk with other likeminded SEOs. Join our Facebook group <a href='$link_address'>Link</a>.';}
 
-echo '<strong><a href="https://www.facebook.com/groups/linkprivacy/" target="_blank">Join the Link Privacy Facebook group here</a>.</strong><br/><br/>Show us any footprint you find. We will fix it. Or come chat about SEO, we like that too.<br/><br/>No licensing required. No "calls home" for updates.<br/><br/>To your true privacy,<br/>Jerry West & Michael Roper, <a href="http://seorevolution.com/">SEO Revolution</a>';}
+echo '<strong><a href="https://www.facebook.com/groups/linkprivacy/" target="_blank">Join the Link Privacy Facebook group here</a>.</strong><br/><br/>Show us any footprint you find. We will fix it. Find a new link analysis bot? We will add it. Or come chat about SEO, we like that too.<br/><br/>No licensing required. No "calls home" for updates. Updates from <a href="https://github.com/michaelbroper/link-privacy" target="_blank">GitHub</a>.<br/><br/>For security and blocking IP ranges, use the <a href="https://wordpress.org/plugins/better-wp-security/" target="_blank">iThemes Security</a> plugin.<br/><br/>To your true privacy,<br/>Jerry West & Michael Roper, <a href="http://seorevolution.com/" target="_blank">SEO Revolution</a>';}
 
 function linkprivacy_add_dashboard_widgets() {
  	wp_add_dashboard_widget( 'linkprivacy_dashboard_widget', 'Link Privacy: Activated', 'linkprivacy_dashboard_widget_function' );
