@@ -5,8 +5,9 @@
   Plugin URI: http://linkprivacy.com
   Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it.
   Author: SEO Revolution
-  Version: 1.2
+  Version: 1.2.1
   Author URI: http://seorevolution.com/
+  GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
 
 
