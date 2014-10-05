@@ -10,7 +10,17 @@
   GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
 
+add_action( 'admin_init', 'link_privacy_has_parent_plugin' );
+function link_privacy_has_parent_plugin() {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'github-updater-develop/github-updater.php' ) ) {
+        add_action( 'admin_notices', 'child_plugin_notice' );
 
+    }
+}
+
+function child_plugin_notice(){
+    ?><div class="error"><p>Link Privacy requires the free <a href="https://github.com/afragen/github-updater/archive/develop.zip" target="_blank">GitHub Updater</a> to be installed and <strong><a href="/wp-admin/plugins.php?action=activate&plugin=github-updater-develop%2Fgithub-updater.php&plugin_status=all&paged=1&s&_wpnonce=1edf7419ad">activated</a></strong> for anonymous updates. <strong>Download <a href="https://github.com/afragen/github-updater/archive/develop.zip" target="_blank">HERE</a></strong>.</p></div><?php
+}
 
 if ( !defined( 'ABSPATH' ) ) {
 	require_once dirname(__FILE__) . '/../../../wp-load.php';
