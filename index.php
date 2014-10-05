@@ -5,10 +5,21 @@
   Plugin URI: http://linkprivacy.com
   Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it.
   Author: SEO Revolution
-  Version: 1.2.1
+  Version: 0.1
   Author URI: http://seorevolution.com/
   GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
+
+if ( !defined( 'ABSPATH' ) ) {
+	require_once dirname(__FILE__) . '/../../../wp-load.php';
+	header( 'HTTP/1.0 404 Not Found' );
+	get_header();
+	global $wp_query;
+	$wp_query->set_404();
+	include( get_404_template() );
+	get_footer();
+	die;
+}
 
 add_action( 'admin_init', 'link_privacy_has_parent_plugin' );
 function link_privacy_has_parent_plugin() {
@@ -20,17 +31,6 @@ function link_privacy_has_parent_plugin() {
 
 function child_plugin_notice(){
     ?><div class="error"><p>Link Privacy requires the free <a href="https://github.com/afragen/github-updater/archive/develop.zip" target="_blank">GitHub Updater</a> to be installed and <strong><a href="/wp-admin/plugins.php?action=activate&plugin=github-updater-develop%2Fgithub-updater.php&plugin_status=all&paged=1&s&_wpnonce=1edf7419ad">activated</a></strong> for anonymous updates. <strong>Download <a href="https://github.com/afragen/github-updater/archive/develop.zip" target="_blank">HERE</a></strong>.</p></div><?php
-}
-
-if ( !defined( 'ABSPATH' ) ) {
-	require_once dirname(__FILE__) . '/../../../wp-load.php';
-	header( 'HTTP/1.0 404 Not Found' );
-	get_header();
-	global $wp_query;
-	$wp_query->set_404();
-	include( get_404_template() );
-	get_footer();
-	die;
 }
 
 if (is_admin()) {
