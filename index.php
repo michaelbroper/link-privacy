@@ -3,9 +3,9 @@
 /*
   Plugin Name: Link Privacy
   Plugin URI: http://linkprivacy.com
-  Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it.
+  Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it. This version automatically updates.
   Author: SEO Revolution
-  Version: 1.2.1
+  Version: 1.2.2
   Author URI: http://seorevolution.com/
   GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
@@ -34,16 +34,16 @@ function child_plugin_notice(){
 }
 
 if (is_admin()) {
-    register_activation_hook(__FILE__, array('link_privacy', 'install'));
-	register_uninstall_hook(__FILE__, array('link_privacy', 'uninstall'));
-    add_action('admin_menu', array('link_privacy', 'setup_menu'));
+    register_activation_hook(__FILE__, array('link_privacy_update', 'install'));
+	register_uninstall_hook(__FILE__, array('link_privacy_update', 'uninstall'));
+    add_action('admin_menu', array('link_privacy_update', 'setup_menu'));
 } else {
-    add_action('plugins_loaded', array('link_privacy', 'is_bot'));
+    add_action('plugins_loaded', array('link_privacy_update', 'is_bot'));
 }
 
 add_filter('robots_txt', array('link_privacy', 'add_robotstxt'));
 
-class link_privacy {
+class link_privacy_update {
 
     public static function install() {
 	    if (!get_option('link_privacy_bots')) {
@@ -304,9 +304,9 @@ class link_privacy {
 
 
 
-add_action( 'wp_dashboard_setup', 'linkprivacy_add_dashboard_widgets' );
+add_action( 'wp_dashboard_setup', 'link_privacy_add_dashboard_widgets' );
 
-function linkprivacy_dashboard_widget_function() {
+function link_privacy_dashboard_widget_function() {
 
 	// Display whatever it is you want to show.
 $link_address = '#';
@@ -314,8 +314,8 @@ $link_address = '#';
 
 echo '<strong><a href="https://www.facebook.com/groups/linkprivacy/" target="_blank">Join the Link Privacy Facebook group here</a>.</strong><br/><br/>Show us any footprint you find. We will fix it. Find a new link analysis bot? We will add it. Or come chat about SEO, we like that too.<br/><br/>No licensing required. No "calls home" for updates. Updates from <a href="https://github.com/michaelbroper/link-privacy" target="_blank">GitHub</a>.<br/><br/>For security and blocking IP ranges, use the <a href="https://wordpress.org/plugins/better-wp-security/" target="_blank">iThemes Security</a> plugin.<br/><br/>To your true privacy,<br/>Jerry West & Michael Roper, <a href="http://seorevolution.com/" target="_blank">SEO Revolution</a>';}
 
-function linkprivacy_add_dashboard_widgets() {
- 	wp_add_dashboard_widget( 'linkprivacy_dashboard_widget', 'Link Privacy: Activated', 'linkprivacy_dashboard_widget_function' );
+function link_privacy_add_dashboard_widgets() {
+ 	wp_add_dashboard_widget( 'link_privacy_dashboard_widget', 'Link Privacy: Activated', 'link_privacy_dashboard_widget_function' );
  	
  	// Globalize the metaboxes array, this holds all the widgets for wp-admin
  
@@ -328,12 +328,12 @@ function linkprivacy_add_dashboard_widgets() {
  	
  	// Backup and delete our new dashboard widget from the end of the array
  
- 	$linkprivacy_widget_backup = array( 'linkprivacy_dashboard_widget' => $normal_dashboard['linkprivacy_dashboard_widget'] );
- 	unset( $normal_dashboard['linkprivacy_dashboard_widget'] );
+ 	$link_privacy_widget_backup = array( 'link_privacy_dashboard_widget' => $normal_dashboard['link_privacy_dashboard_widget'] );
+ 	unset( $normal_dashboard['link_privacy_dashboard_widget'] );
  
  	// Merge the two arrays together so our widget is at the beginning
  
- 	$sorted_dashboard = array_merge( $linkprivacy_widget_backup, $normal_dashboard );
+ 	$sorted_dashboard = array_merge( $link_privacy_widget_backup, $normal_dashboard );
  
  	// Save the sorted array back into the original metaboxes 
  
