@@ -3,9 +3,9 @@
 /*
   Plugin Name: Link Privacy
   Plugin URI: http://linkprivacy.com
-  Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it. This version automatically updates.
+  Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it. This version automatically updates and stops Semalt referrals!
   Author: SEO Revolution
-  Version: 1.2.2
+  Version: 1.2.3
   Author URI: http://seorevolution.com/
   GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
@@ -20,6 +20,12 @@ if ( !defined( 'ABSPATH' ) ) {
 	get_footer();
 	die;
 }
+
+if (preg_match('/semalt\.com/', $_SERVER['HTTP_REFERER']) )
+   {
+     header('HTTP/1.0 403 Forbidden');
+     exit;
+   }
 
 add_action( 'admin_init', 'link_privacy_has_parent_plugin' );
 function link_privacy_has_parent_plugin() {
