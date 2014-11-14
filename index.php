@@ -5,7 +5,7 @@
   Plugin URI: http://linkprivacy.com
   Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it. This version automatically updates and stops Semalt referrals!
   Author: SEO Revolution
-  Version: 1.2.5
+  Version: 1.2.5.1
   Author URI: http://seorevolution.com/
   GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
@@ -29,14 +29,14 @@ if (preg_match('/semalt\.com/', $_SERVER['HTTP_REFERER']) )
 
 add_action( 'admin_init', 'link_privacy_has_parent_plugin' );
 function link_privacy_has_parent_plugin() {
-    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'github-updater/github-updater.php' ) ) {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !class_exists( 'GitHub_Updater' ) ) {
         add_action( 'admin_notices', 'child_plugin_notice' );
 
     }
 }
 
 function child_plugin_notice(){
-    ?><div class="error"><p>Link Privacy requires the free <a href="https://github.com/afragen/github-updater/archive/develop.zip" target="_blank">GitHub Updater</a> to be installed and <strong><a href="/wp-admin/plugins.php?action=activate&plugin=github-updater-develop%2Fgithub-updater.php&plugin_status=all&paged=1&s&_wpnonce=1edf7419ad">activated</a></strong> for anonymous updates. <strong>Download <a href="https://github.com/afragen/github-updater/archive/develop.zip" target="_blank">HERE</a></strong>.</p></div><?php
+    ?><div class="error"><p>Link Privacy requires the free <a href="https://github.com/afragen/github-updater/archive/master.zip" target="_blank">GitHub Updater</a> to be installed and <strong>activated</strong> for anonymous updates. <strong>Download <a href="https://github.com/afragen/github-updater/archive/master.zip" target="_blank">here</a></strong>.</p></div><?php
 }
 
 if (is_admin()) {
@@ -98,7 +98,9 @@ class link_privacy_update {
 			array('id' => 30, 'url' => 'https://support.google.com/webmasters/answer/182072?hl=en', 'bot' => 'googlebot', 'action' => null),
 			array('id' => 31, 'url' => 'https://support.google.com/webmasters/answer/178852', 'bot' => 'Feedfetcher-Google', 'action' => null),
 			array('id' => 32, 'url' => 'http://en.wikipedia.org/wiki/Bingbot', 'bot' => 'BingBot', 'action' => null),
-			array('id' => 33, 'url' => 'http://nerdybot.com/', 'bot' => 'NerdyBot', 'action' => 'deny')
+			array('id' => 33, 'url' => 'http://nerdybot.com/', 'bot' => 'NerdyBot', 'action' => 'deny'),
+			array('id' => 34, 'url' => 'http://cognitiveseo.com/bot.html', 'bot' => 'JamesBOT', 'action' => 'deny'),
+			array('id' => 35, 'url' => 'http://www.tineye.com/crawler.html', 'bot' => 'TinEye', 'action' => 'deny')
 		);
         update_option('link_privacy_bots', serialize($defaultBots));
 	}
