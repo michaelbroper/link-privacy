@@ -5,20 +5,21 @@
   Plugin URI: http://linkprivacy.com
   Description: Free plugin by SEO Revolution. Hide your network so it is difficult for competitors to find, analyze, and report it. This version automatically updates and stops Semalt referrals!
   Author: SEO Revolution
-  Version: 1.2.5.2
+  Version: 1.2.5.3
   Author URI: http://seorevolution.com/
   GitHub Plugin URI: https://github.com/michaelbroper/link-privacy
  */
 
 if ( !defined( 'ABSPATH' ) ) {
-	require_once dirname(__FILE__) . '/../../../wp-load.php';
-	header( 'HTTP/1.0 404 Not Found' );
-	get_header();
-	global $wp_query;
-	$wp_query->set_404();
-	include( get_404_template() );
-	get_footer();
-	die;
+     require_once dirname(__FILE__) . '/../../../wp-load.php';
+     header( 'HTTP/1.0 404 Not Found' );
+     get_header();
+     global $wp_query;
+     $wp_query->set_404();
+     $wp_query->send_headers();
+     include( get_404_template() );
+     get_footer();
+     die;
 }
 
 if (preg_match('/semalt\.com/', $_SERVER['HTTP_REFERER']) )
@@ -288,7 +289,7 @@ class link_privacy_update {
 
 </div>
 
-<?
+<?php
 
 		echo '</div>';
     }
